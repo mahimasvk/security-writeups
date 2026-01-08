@@ -15,8 +15,8 @@ used to verify user credentials, after a strengthened security system.
 ## Attack / Solution
 1. I attempted my initial SQL injection from the first problem:
 ```sql
-username: ' OR true OR ' `
-password: ' OR true OR ' `
+username: ' OR true OR '
+password: ' OR true OR '
 ```
 To which I was given the response:
 ```sql
