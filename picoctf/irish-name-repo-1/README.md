@@ -13,42 +13,70 @@ used to verify user credentials.
 ---
 
 ## Attack / Solution
-1. Reviewed the challenge hints, which suggested that user credentials are stored in a database. This implied that the login functionality relies on a SQL query for authentication.
-2. Inspected the page source and discovered a hidden input field labeled `debug` that was set to `0`. Since hidden fields are still sent to the server, the value was modified to `1` to enable debug output.
-3. Submitted a test username and password to observe backend behavior. With debugging enabled, the website revealed the full SQL query used for login verification:
+1. Reviewed the challenge's hints, which suggested that user info is stored in a database.
+2. This implies that the login functionality relies on a SQL query for authentication.
+3. I inspected the page source and discovered a hidden input field labeled `debug` that was set to `0`.
+4. This implies that a debug test was accidentally leaked and set to false to be hidden.
+5. Since hidden fields are still sent to the server, I modified the value to `1` (true) to show the debug output.
+6. I submitted 'xyz' for both the username and password to observe backend behavior.
+7. With the debugging test enabled, the website revealed the full SQL query used for login verification:
 ```sql
-SELECT * FROM users
-WHERE name='admin' AND password='admin';
+username: xyz
+password: xyz
+SQL query: SELECT * FROM users WHERE name='xyz' AND password='xyz'
 ```
-4. Observing that user input was directly embedded into the SQL query without sanitization, it became clear that the application was vulnerable to SQL injection.
-5. By leveraging control over the string delimiter and logical operators in the query, the authentication condition was manipulated to always evaluate as true. Commenting out the remaining portion of the query prevented syntax errors and bypassed the password check entirely.
+4. This shows that user input is directly embedded into the SQL query, so the site would be vulnerable to SQL injection.
+5. To test, I changed both inputs to close the first single quote, accept a true statement, and then close the second single quote:
+```sql
+username: ' OR true OR '
+password: ' OR true OR '
+SQL query: SELECT * FROM users WHERE name='' OR true OR '' AND password='' OR true OR ''
+```
 6. As a result, authentication was successfully bypassed and access to the admin page was granted, revealing the flag.
 
 ---
 
 ## Key Concepts Explained
-### Concept
-Description
+### SQL Injection
+SQL injection occurs when user input is inserted directly into a database query without proper validation.
+This allows attackers to modify the structure or logic of the query itself rather than supplying expected data.
+
+### Authentication Logic
+Many login systems rely solely on whether a database query returns any rows.
+If the query logic is altered to always return a result, authentication can be bypassed entirely.
+
+### Debug Information Disclosure
+Exposing debugging features in production environments can reveal sensitive internal logic,
+such as database queries, which greatly lowers the barrier for exploitation.
 
 ---
 
 ## Tools Used
-- Tools used
+- Browser developer tools
+- Source Inspection
+- SQL Injection
 
 ---
 
 ## Lessons Learned
-- Lessons
+- Authentication mechanisms should never rely on unsanitized user input.
+- Debug features must be removed or disabled before deployment.
+- Understanding how backend queries are constructed is critical for identifying vulnerabilities.
+- SQL injection is fundamentally a logic vulnerability, not a brute force attack.
 
 ---
 
 ## Security Implications
-What this challenge shows about security.
+This challenge shows how improper input handling and debugging disclosure can compromise authentication systems.
+Even simple login forms can become critical vulnerabilities if database queries are constructed insecurely.
 
 ---
 
 ## Mitigation
-- What not to do to avoid security leaks.
+- Use prepared statements or parameterized queries.
+- Never expose debugging information to users.
+- Validate and sanitize all user input.
+- Implement additional authentication safeguards beyond a single database check.
 
 ---
 
