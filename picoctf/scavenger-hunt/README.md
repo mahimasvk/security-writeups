@@ -1,11 +1,15 @@
 # PicoCTF - Scavenger Hunt (Web Exploitation)
 
+--- 
+
 ## Challenge Link
 [Scavenger Hunt CTF Link](https://play.picoctf.org/practice/challenge/161?category=1&difficulty=1&page=2)
 
 ## Overview
 This is a beginner web exploration challenge that requires inspecting the website to find a hidden flag. 
 The goal is to explore all page elements and clues using basic web tools like a browser inspector.
+
+---
 
 ## Attack / Solution
 1. Viewed the page source to inspect content.
@@ -19,6 +23,8 @@ The goal is to explore all page elements and clues using basic web tools like a 
 11. A final hint in the comments mentioned using a MacBook for its storage capabilities.
 12. Assuming this website was uploaded from a Mac, there was a possibility that the DS_Store file was intentionally uploaded.
 13. In the `.DS_Store` file, I found the final part of the flag.
+
+---
 
 ## Key Concepts Explained
 ### Apache
@@ -42,9 +48,9 @@ If uploaded to a web server, it can expose internal directory structure and file
 
 ## Tools Used
 - Web browser developer tools
-- View Page Source
+   Page Source
 - Manual URL manipulation
-- Logical inference from developer comments
+- Inference from developer comments
 
 ---
 
@@ -57,7 +63,7 @@ If uploaded to a web server, it can expose internal directory structure and file
 ---
 
 ## Security Implications
-This challenge demonstrates how poor file hygiene and misconfigured servers
+This challenge demonstrates how poor file safety and misconfigured servers
 can lead to unintended information disclosure without exploiting complex vulnerabilities.
 
 ---
@@ -66,6 +72,5 @@ can lead to unintended information disclosure without exploiting complex vulnera
 - Do not store secrets or hints in client-side comments.
 - Restrict access to configuration files like `.htaccess`.
 - Never upload `.DS_Store` or OS-generated metadata files.
-- Use proper server-side access controls instead of relying on obscurity.
 
 ---
