@@ -10,5 +10,5 @@ Each challenge includes:
 - **Concepts and reasoning** to show understanding of the underlying security principles
 - Lessons learned and best practices for web security
 
---
+---
 
