@@ -1,6 +1,6 @@
-# PicoCTF Writeups
+# CyLab (Formerly Known as PicoCTF) Writeups
 
-Welcome to my PicoCTF writeup repository! This folder contains my solutions and explanations for various 
+Welcome to my CyLab writeup repository! This folder contains my solutions and explanations for various 
 PicoCTF challenges, focused primarily on **web exploitation** and beginner-friendly CTF problems.
 
 Each challenge includes:
