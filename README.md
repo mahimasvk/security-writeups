@@ -17,5 +17,15 @@ with a focus on threat models, assumptions, and why systems fail.
 - `code/` – small proof-of-concept demos
 - `references/` – papers and learning resources
 
+### Each challenge includes:
+- A **link** to the original challenge
+- An **overview** of the challenge
+- A **step-by-step attack/solution** section explaining how the flag was obtained
+- **Concepts and reasoning** to show understanding of the underlying security principles
+- Lessons learned and best practices for web security
+
+---
+
+
 ## Disclaimer
 All analyses I've completed are performed on intentionally vulnerable or educational systems.

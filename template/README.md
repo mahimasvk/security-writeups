@@ -1,4 +1,4 @@
-# PicoCTF - Title (Category)
+# Site - Title (Category)
 
 --- 
 
